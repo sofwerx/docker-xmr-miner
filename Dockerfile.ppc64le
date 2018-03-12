@@ -1,0 +1,35 @@
+FROM nvidia/cuda-ppc64le:9.1-devel-ubuntu16.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN echo "deb http://ports.ubuntu.com/ubuntu-ports xenial main security universe multiverse" > /etc/apt/sources.list.d/ports.list
+RUN echo "deb http://us.ports.ubuntu.com/ubuntu-ports/ xenial-backports main restricted universe multiverse" > /etc/apt/sources.list.d/backports.list
+RUN apt-get update
+RUN apt-get install -y openssl wget zlib1g-dev
+RUN echo "deb ftp://ftp.unicamp.br/pub/linuxpatch/toolchain/at/ubuntu xenial at10.0" > /etc/apt/sources.list.d/at10.list
+RUN wget -O - ftp://ftp.unicamp.br/pub/linuxpatch/toolchain/at/ubuntu/dists/xenial/6976a827.gpg.key | apt-key add -
+RUN apt-get update
+RUN apt-get install -y advance-toolchain-at10.0-runtime \
+        advance-toolchain-at10.0-devel \
+        advance-toolchain-at10.0-perf \
+        advance-toolchain-at10.0-mcore-libs
+RUN apt-get install -y build-essential git cmake libmicrohttpd-dev libhwloc-dev libssl-dev
+#RUN apt-get install -y build-essential git cmake zlib1g-dev libssl-dev
+
+ENV LD_LIBRARY_PATH=/usr/lib/powerpc64le-linux-gnu/
+
+ENV PATH=/opt/at10.0/bin:$PATH
+
+RUN git clone https://github.com/sofwerx/xmr-stak-power /xmr-stak-power
+WORKDIR /xmr-stak-power
+
+RUN mkdir build ; cd build ; cmake ..
+RUN cd build ; make -j install
+
+ENV PATH=/xmr-stak-power/build/bin:$PATH
+
+RUN ln -s /xmr-stak-power/build/bin/xmr-stak-power /xmr-stak-power/build/bin/xmr-stak
+
+ADD run.sh /run.sh
+
+CMD /run.sh
