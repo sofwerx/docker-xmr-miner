@@ -19,7 +19,8 @@ Your installed nvidia driver version may differ from `387.36`.
 Edit `docker-compose.yml` to:
 
 - Replace the `387.36` with your currently installed nvidia driver version.
-- Replace `2c0859b9312d9bf93e1b4cae8d47d59030a75a9f` with your own ethereum address.
+
+Edit `.env` or set environment variables for `docker-compose` to use.
 
 Then run:
 
