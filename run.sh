@@ -53,7 +53,7 @@ cat <<EOF > config.txt
 { "low_power_mode" : true, "little_endian_mode" : false, "affine_to_cpu" : 72 },
 { "low_power_mode" : true, "little_endian_mode" : false, "affine_to_cpu" : 76 },
 
-{ "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 2 },
+/*{ "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 2 },
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 10 },
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 18 },
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 26 },
@@ -73,6 +73,7 @@ cat <<EOF > config.txt
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 62 },
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 70 },
 { "low_power_mode" : false, "little_endian_mode" : false, "affine_to_cpu" : 78 },
+*/
 
 
 /*{ "low_power_mode" : true, "little_endian_mode" : false, "affine_to_cpu" : 80 },
